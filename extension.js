@@ -31,11 +31,14 @@ export default class LegacyThemeSchemeAutoSwitcher {
             case LIGHT_SCHEME_NAME:
                 if (this.schema.get_string('gtk-theme').endsWith("-dark")) {
                     this.schema.set_string('gtk-theme', this.schema.get_string('gtk-theme').slice(0,-5));
+                    this.schema.set_string('icon-theme', this.schema.get_string('icon-theme').slice(0, this.schema.get_string('icon-theme').lastIndexOf('-')) + '-Light');
                 }
                 break;
             case DARK_SCHEME_NAME:
                 if (!this.schema.get_string('gtk-theme').endsWith("-dark")) {
                     this.schema.set_string('gtk-theme', this.schema.get_string('gtk-theme') + "-dark");
+                    this.schema.set_string('icon-theme', this.schema.get_string('icon-theme').slice(0, this.schema.get_string('icon-theme').lastIndexOf('-')) + '-Dark');
+
                 }
                 break;
             default:
